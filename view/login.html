@@ -1,0 +1,33 @@
+<div class="wrap module" module="login">
+    <form>
+        <div class="title">
+            <strong>申请志愿者</strong>
+        </div>
+        <div class="login-box">
+            <div class="login-item">
+                <ul>
+                    <li class="phone-text">
+                        <span class="get-code">获取验证码</span>
+
+                        <div class="phone-text-left">
+                            <input type="text" name="phone_number" id="phone_number" placeholder="请输入手机号码" maxlength="11" />
+                        </div>
+                    </li>
+                    <li class="code-text">
+                        <input type="text" name="sms_code" id="sms_code" placeholder="请输入验证码" maxlength="4" />
+                    </li>
+                </ul>
+            </div>
+            <div class="login-item">
+                <ul>
+                    <li class="select-fwz">
+                        <input type="text" name="serve_community_name" placeholder="选择志愿服务站" value="" readonly="readonly" id="serve_community_name" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <input type="hidden" name="serve_community_id" id="serve_community_id" value="" />
+        <input type="hidden" name="city_name" id="city_name" value="" />
+        <div class="sub-btn"><a href="javascript:;" class="" id="btnNext">下一步</a></div>
+    </form>
+</div>
