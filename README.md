@@ -39,12 +39,12 @@
 
 
 ### 核心代码
-#### app 单例模式app实例
+#### App类单例
 
 <pre>
 app.regModule();     //注册新模块
 
-app.getModule();     //模块已注册模块,可以通过模块来获取当前模块状态数据，例如: app.getModule('login').getData(); 但不建议使用该方法去破坏路由器本身降低耦合的本质。
+app.getModule();     //可以通过模块来获取当前模块状态数据，例如: app.getModule('login').getData(); 但不建议使用该方法去破坏路由器本身降低耦合的本质。
 
 app.goto('/login');  //重定向并加载另外一个模块
 
@@ -61,16 +61,22 @@ app.showMsg("my name is:{0}","issac"); //显示提示消息
 定义了视图渲染 和 请求处理 两个功能；
 
 
-> onRender - 渲染过程的回调函数
+> onRender - 渲染事件
+
+只会执行一次。
 
 需要进行事件绑定,完成渲染后调用 this.render方法，将jquery对象传给框架去处理
 
 
-> onLoad - 模块加载函数,调用app.goto方法后会触发该函数
+> onLoad - 模块加载事件
+
+通过app.goto方法会触发该事件
 
 参数request: 为Router.js 的类, 常用方法为request.get('xxx','defaultValue');
 
 参数this: 表示当前模块类型,有以下属性:
+
+    this.render - 用于onRender事件中,完成渲染对象后调用
 
 	this.$view 当前已渲染好的视图jquery对象
 
