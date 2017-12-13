@@ -5,16 +5,16 @@
 如果您不想用Vue.JS、ReactJS、AngularJS就可以实现:
 
 
-* 1.路由功能 -- 使用Router.js路由器
-* 2.模块分离
-* 3.控制器与视图分离
-* 4.数据与HTML分离(模板引擎) --使用腾讯模板引擎 artTemplate
-* 5.支持浏览器后退前进 切换模块功能
+1.路由功能 -- 使用Router.js路由器
+2.模块分离
+3.控制器与视图分离
+4.数据与HTML分离(模板引擎) --使用腾讯模板引擎 artTemplate
+5.支持浏览器后退前进 切换模块功能
 
-每个模块就像 Spring MVC里的Controller一样负责以下工作:
+每个模块 Module类 就像 Spring MVC里的Controller一样负责以下工作:
 
-* 1.渲染页面  -- onRender事件
-* 2.处理请求  -- onLoad事件
+* 渲染页面  -- onRender事件
+* 处理请求  -- onLoad事件
 
 
 #### 最终实现效果:
@@ -38,7 +38,7 @@
 
 ### 核心代码
 #### app 单例模式app实例
-常用方法:
+
 <pre>
 app.regModule();     //注册新模块
 
@@ -53,6 +53,30 @@ app.hideLoading();   //隐藏loading效果
 app.showMsg("my name is:{0}","issac"); //显示提示消息
 
 </pre>
+
+#### Module类
+
+定义了视图渲染 和 请求处理 两个功能；
+
+
+> onRender - 渲染过程的回调函数
+
+需要进行事件绑定,完成渲染后调用 this.render方法，将jquery对象传给框架去处理
+
+
+> onLoad - 模块加载函数,调用app.goto方法后会触发该函数
+
+参数request: 为Router.js 的类, 常用方法为request.get('xxx','defaultValue');
+
+参数this: 表示当前模块类型,有以下属性:
+
+	this.$view 当前已渲染好的视图jquery对象
+
+	this.XXXX 注册模块时所定义的自定义属性，例如this.myMethod
+
+
+
+
 
 
 ### 加载模块:
@@ -144,23 +168,4 @@ $(function () {
 
 });
 </pre>
-
-#### Module模块类主要的两个方法:
-
-
-> onRender - 渲染过程的回调函数
-
-需要进行事件绑定,完成渲染后调用 this.render方法，将jquery对象传给框架去处理
-
-
-> onLoad - 模块加载函数,调用app.goto方法后会触发该函数
-
-参数request: 为Router.js 的类, 常用方法为request.get('xxx','defaultValue');
-
-参数this: 表示当前模块类型,有以下属性:
-
-	this.$view 当前已渲染好的视图jquery对象
-
-	this.XXXX 注册模块时所定义的自定义属性，例如this.myMethod
-
 
