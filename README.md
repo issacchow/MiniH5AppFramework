@@ -12,8 +12,8 @@
 
 每个模块就像 Spring MVC里的Controller一样负责以下工作:
 
-* 1.渲染页面
-* 2.处理请求
+* 1.渲染页面  -- onRender事件
+* 2.处理请求  -- onLoad事件
 
 
 #### 最终实现效果:
@@ -143,3 +143,23 @@ $(function () {
 
 });
 </pre>
+
+#### Module模块类主要的两个方法:
+
+
+> onRender - 渲染过程的回调函数
+
+需要进行事件绑定,完成渲染后调用 this.render方法，将jquery对象传给框架去处理
+
+
+> onLoad - 模块加载函数,调用app.goto方法后会触发该函数
+
+参数request: 为Router.js 的类, 常用方法为request.get('xxx','defaultValue');
+
+参数this: 表示当前模块类型,有以下属性:
+
+	this.$view 当前已渲染好的视图jquery对象
+
+	this.XXXX 注册模块时所定义的自定义属性，例如this.myMethod
+
+
